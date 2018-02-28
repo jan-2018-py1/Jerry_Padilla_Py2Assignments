@@ -9,6 +9,9 @@
      <title>Index</title>
 </head>
 <body>
+     {% if request.session.user %}
+          <h1>Welcome {{request.session.user}}</h1>
+     {% endif %}
      <h3>Index page: Will have a table of the users that I add</h3>
 
      <table class="table">
@@ -18,6 +21,7 @@
       <th scope="col">Full Name</th>
       <th scope="col">Email</th>
       <th scope="col">Created At</th>
+      <th scope="col">Hashed PW</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -29,6 +33,7 @@
            <td>{{user.first_name}} {{user.last_name}}</td>
            <td>{{user.email}}</td>
            <td>{{user.created_at}}</td>
+           <td>{{user.password}}</td>
            <td><a href="{% url 'users:show' user.id %}">Show</a>
                <a href="{% url 'users:edit' user.id %}">Edit</a>
                <a href="{% url 'users:destroy' user.id %}">Delete</a>
@@ -39,5 +44,7 @@
 </table>
 
      <a href="{% url 'users:add' %}">Add New User</a>
+     <a href="{% url 'register:index' %}">Register</a>
+     <a href="{% url 'login:index' %}">Login</a>
 </body>
 </html>
